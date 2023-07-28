@@ -41,3 +41,30 @@ export type TPlayerModalProps = {
   onClose: () => void;
   onStartGame: (playerName: string) => void;
 };
+
+export type ITile = {
+  url: string;
+  handleImageReady: () => void;
+  showImages: boolean;
+  onClick: (isDuck: boolean) => void;
+  isDuck: boolean;
+  next: () => void;
+};
+
+export type IControllerContextType = {
+  playerName: string;
+  startGame: boolean;
+  score: number;
+  leaderboard: TLeaderboardItem[];
+  setPlayerName: (arg: string) => void;
+  start: () => void;
+  Over: () => void;
+  scoreUp: () => void;
+  scoreDown: () => void;
+  newPlayer: () => void;
+  playAgain: () => void;
+};
+
+export type ContextProps = {
+  children?: ReactNode | undefined;
+};

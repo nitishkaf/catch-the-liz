@@ -5,10 +5,12 @@ import Header from "@/components/Header";
 import PlayerModal from "@/components/PlayerModal";
 import { useGameContext } from "@/context/ContextProvider";
 import Head from "next/head";
+import Board from "@/components/Board";
+import { Center, Container } from "@chakra-ui/react";
 
 export default function Home() {
   //@ts-ignore
-  const { start, startHandler, setPlayer } = useGameContext();
+  const { startGame, start, setPlayerName } = useGameContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -20,8 +22,8 @@ export default function Home() {
   };
 
   const handleStartGame = (playerName: string) => {
-    setPlayer(playerName);
-    startHandler();
+    setPlayerName(playerName);
+    start();
     handleModalClose();
   };
 
@@ -30,14 +32,27 @@ export default function Home() {
       <Head>
         <title>Catch The Duck</title>
       </Head>
-      <Header />
-      {start ? <div> started </div> : <div> Not started </div>}
-      <Buttons onClick={handleModalOpen}>Play</Buttons>
-      <PlayerModal
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-        onStartGame={handleStartGame}
-      />
+      <Container
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <Header />
+        {startGame ? (
+          <Board />
+        ) : (
+          <Center mt={20}>
+            <Buttons onClick={handleModalOpen}>Play</Buttons>
+            <PlayerModal
+              isOpen={isModalOpen}
+              onClose={handleModalClose}
+              onStartGame={handleStartGame}
+            />
+          </Center>
+        )}
+      </Container>
     </>
   );
 }

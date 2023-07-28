@@ -1,60 +1,66 @@
 import { createContext, useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { TLeaderboardItem } from "@/types";
+import {
+  ContextProps,
+  IControllerContextType,
+  TLeaderboardItem,
+} from "@/types";
 
-const Context = createContext({});
+const Context = createContext<IControllerContextType | null>(null);
 
-const ContextProvider = ({ children }: any) => {
+const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   const router = useRouter();
-  const [player, setPlayer] = useState("");
-  const [score, setScore] = useState(0);
-  const [start, setStart] = useState(false);
+  const [playerName, setPlayerName] = useState("");
   const [leaderboard, setLeaderboard] = useState<TLeaderboardItem[]>([]);
+  const [startGame, setStartGame] = useState(false);
+  const [score, setScore] = useState(0);
 
-  const scoreHandler = (hit: any) => {
-    if (hit) {
-      setScore(score + 1);
-    } else {
-      setScore(score - 1);
-    }
+  const scoreUp = () => {
+    setScore((prev) => prev + 1);
   };
 
-  const startHandler = () => {
-    setStart(true);
+  const scoreDown = () => {
+    setScore((prev) => prev - 1);
   };
 
-  const endHandler = () => {
-    setStart(false);
+  const start = () => {
+    setStartGame(true);
+  };
+
+  const Over = () => {
+    setStartGame(false);
     setLeaderboard((prev) => {
-      return [...prev, { date: new Date(), name: player, score: score }].sort(
-        (a, b) => b.score - a.score
-      );
+      return [
+        ...prev,
+        { date: new Date(), name: playerName, score: score },
+      ].sort((a, b) => b.score - a.score);
     });
     router.push("/leaderboard");
   };
 
-  const resetHandler = () => {
+  const newPlayer = () => {
     router.push("/");
-    setPlayer("");
+    setPlayerName("");
     setScore(0);
   };
 
-  const playAgainHandler = () => {
+  const playAgain = () => {
     router.push("/");
     setScore(0);
   };
 
   const value = {
-    player,
-    setPlayer,
+    playerName,
+    startGame,
     score,
-    scoreHandler,
-    start,
-    startHandler,
-    endHandler,
-    resetHandler,
-    playAgainHandler,
     leaderboard,
+    setPlayerName,
+    start,
+    Over,
+    scoreUp,
+    scoreDown,
+    newPlayer,
+    playAgain,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

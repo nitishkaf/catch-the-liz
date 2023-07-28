@@ -11,9 +11,13 @@ export const useDuck = (): string => {
       try {
         const response = await axios.get<DUCKType>(DUCK_URL);
         const result = response.data;
-        setDuckImage(result.url); // Corrected to use result.url
+        if (Array.isArray(result) && result.length > 0) {
+          setDuckImage(result[0]);
+        } else {
+          console.error("Empty or invalid response from the API.");
+        }
       } catch (error) {
-        throw new Error("Error trying to fetch duck");
+        console.error("Error trying to fetch shiba inu", error);
       }
     };
     fetchDuck();

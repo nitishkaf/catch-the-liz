@@ -5,10 +5,10 @@ import ContextProvider from "@/context/ContextProvider";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
-      <ContextProvider>
+    <ContextProvider>
+      <ChakraProvider>
         <Component {...pageProps} />
-      </ContextProvider>
-    </ChakraProvider>
+      </ChakraProvider>
+    </ContextProvider>
   );
 }

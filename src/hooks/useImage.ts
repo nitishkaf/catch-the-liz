@@ -37,17 +37,28 @@ export const useImages = (): {
     fetchData();
   }, [fetchData]);
 
-  const fetchNextSet = async () => {
+  const fetchNextSet = useCallback(async () => {
     try {
-      fetchData();
+      const values = await Promise.all([cats, dogs, duckUrl]);
+
+      const result = values[0]
+        .concat(values[1])
+        .map((image) => ({ isDuck: false, image }));
+
+      if (duckUrl) {
+        result.push({ isDuck: true, image: duckUrl });
+      }
+
+      setNextSet(result);
     } catch (error) {
       throw new Error("Failed to fetch data for the next set");
     }
-  };
+  }, [cats, dogs, duckUrl]);
 
-  const next = () => {
+  const next = useCallback(() => {
+    setCurrentSet(randomize(nextSet));
     fetchNextSet();
-  };
+  }, [nextSet, fetchNextSet]);
 
   return {
     currentSet,
