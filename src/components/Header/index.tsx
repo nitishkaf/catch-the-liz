@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <Flex as="main" direction="column" align="center" justify="center" mt={10}>
       <Heading>Catch The Liz</Heading>
-      <Text>A classic Liz HUNT inspired web game!</Text>
+      <Text>A classic web game!</Text>
     </Flex>
   );
 };
