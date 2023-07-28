@@ -7,11 +7,7 @@ type TButton = {
   children: ReactNode;
 };
 
-const Buttons: React.FC<TButton> = ({
-  disabled = false,
-  onClick,
-  children,
-}) => {
+const Buttons: React.FC<TButton> = ({ disabled, onClick, children }) => {
   return (
     <Button
       variant="outline"
@@ -19,14 +15,14 @@ const Buttons: React.FC<TButton> = ({
       bg="white.400"
       color="white.200"
       _disabled={{
-        borderColor: "red.200",
-        bg: "gray",
+        borderColor: "gray.600",
+        bg: "gray.600",
         color: "white.400",
       }}
       w="48"
       h="12"
       onClick={onClick}
-      disabled={disabled}
+      isDisabled={disabled}
     >
       {children}
     </Button>

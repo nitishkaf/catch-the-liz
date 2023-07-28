@@ -25,6 +25,9 @@ const PlayerModal: React.FC<TPlayerModalProps> = ({
   };
 
   const handleStartGame = () => {
+    if (input === "") {
+      return;
+    }
     onStartGame(input);
   };
 
