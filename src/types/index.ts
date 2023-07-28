@@ -8,7 +8,7 @@ export type CATType = {
   height: number;
 };
 
-export type DUCKType = {
+export type LizType = {
   message: string;
   url: string;
 };
@@ -20,7 +20,7 @@ export type DOGType = {
 
 export type TileType = {
   image: string;
-  isDuck: boolean;
+  isLiz: boolean;
 };
 
 export type TTimeBlock = {
@@ -45,9 +45,9 @@ export type TPlayerModalProps = {
 export type ITile = {
   url: string;
   handleImageReady: () => void;
+  onClick: (isLiz: boolean) => void;
+  isLiz: boolean;
   showImages: boolean;
-  onClick: (isDuck: boolean) => void;
-  isDuck: boolean;
   next: () => void;
 };
 

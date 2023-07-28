@@ -6,13 +6,13 @@ const Tile = ({
   handleImageReady,
   showImages,
   onClick,
-  isDuck,
+  isLiz,
   next,
 }: ITile) => {
   return (
     <Flex justify="center" align="center">
       {!showImages && (
-        <Box cursor="pointer" onClick={() => next}>
+        <Box cursor="pointer" onClick={next}>
           <Skeleton height="200px" width="200px" />
         </Box>
       )}
@@ -22,7 +22,7 @@ const Tile = ({
         onLoad={handleImageReady}
         src={url}
         hidden={!showImages}
-        onClick={() => onClick(isDuck)}
+        onClick={() => onClick(isLiz)}
         alt="pictures of animals"
         style={{
           objectFit: "cover",

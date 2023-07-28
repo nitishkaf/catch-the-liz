@@ -43,8 +43,8 @@ const Board: React.FC<IBoard> = () => {
     timer === 0 && Over();
   }, [timer]);
 
-  const handleImageHit = (isDuck: boolean) => {
-    if (isDuck) {
+  const handleImageHit = (isLiz: boolean) => {
+    if (isLiz) {
       scoreUp();
     } else {
       scoreDown();
@@ -70,7 +70,7 @@ const Board: React.FC<IBoard> = () => {
             handleImageReady={handleImageReady}
             showImages={showImages}
             onClick={handleImageHit}
-            isDuck={url.isDuck}
+            isLiz={url.isLiz}
             next={onNext}
           />
         ))}

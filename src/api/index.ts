@@ -1,36 +1,49 @@
-import { useState, useEffect } from "react";
+import { CAT_URL, DOG_URL, LIZ_URL } from "@/utils/constant";
+import { CATType, DOGType, LizType } from "@/types";
 import { randomize } from "@/utils/randomize";
-import { TileType } from "@/types";
-import { useCats, useDuck, useDogs } from "@/hooks";
 
-export const useData = (): TileType[] => {
-  const [data, setData] = useState<TileType[]>([]);
-  const cats = useCats();
-  const duckUrl = useDuck();
-  const dogs = useDogs();
+const fetchCats = async () => {
+  try {
+    const data = await fetch(CAT_URL);
+    const result = (await data.json()) as CATType[];
+    return result.slice(0, 4).map((c) => c.url);
+  } catch (error) {
+    throw new Error("Error trying to fetch cats");
+  }
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const values = await Promise.all([cats, dogs, duckUrl]);
+const fetchLiz = async () => {
+  try {
+    const data = await fetch(LIZ_URL);
+    const result = (await data.json()) as LizType;
 
-        const result = values[0]
-          .concat(values[1])
-          .map((image) => ({ isDuck: false, image })); // get dogs and cats as non-ducks
+    return result.url;
+  } catch (error) {
+    throw new Error("Error trying to fetch Fox");
+  }
+};
 
-        if (duckUrl) {
-          // Check if duckUrl is not empty before adding the duck value to the array
-          result.push({ isDuck: true, image: duckUrl });
-        }
+const fetchDogs = async () => {
+  try {
+    const data = await fetch(DOG_URL);
+    const result = (await data.json()) as DOGType;
 
-        setData(randomize(result));
-      } catch (error) {
-        throw new Error("Failed to fetch data");
-      }
-    };
+    return result.message;
+  } catch (error) {
+    throw new Error("Error trying to fetch Dog");
+  }
+};
 
-    fetchData();
-  }, [cats, dogs, duckUrl]);
+export const fetchData = async () => {
+  try {
+    const values = await Promise.all([fetchCats(), fetchDogs(), fetchLiz()]);
 
-  return data;
+    const result = values[0]
+      .concat(values[1])
+      .map((i) => ({ isLiz: false, image: i }));
+    result.push({ isLiz: true, image: values[2] });
+    return randomize(result);
+  } catch (error) {
+    throw new Error("failed to fetch data");
+  }
 };

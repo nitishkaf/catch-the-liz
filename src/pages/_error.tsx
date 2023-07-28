@@ -5,7 +5,7 @@ export default function ErrorPageHandler() {
   return (
     <>
       <Head>
-        <title>Error - Catch The Duck</title>
+        <title>Error - Catch The Liz</title>
       </Head>
       <ErrorPage title="An Error Occurred" />
     </>

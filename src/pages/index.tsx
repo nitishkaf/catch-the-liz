@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Catch The Duck</title>
+        <title>Catch The Liz</title>
       </Head>
       <Container
         display="flex"
