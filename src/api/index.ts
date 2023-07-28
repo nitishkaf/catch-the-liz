@@ -1,66 +1,7 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { randomize } from "@/utils/randomize";
-import { CATType, DOGType, DUCKType, TileType } from "@/types";
-import { CAT_URL, DOG_URL, DUCK_URL } from "@/utils/constant";
-
-const useCats = (): string[] => {
-  const [catUrls, setCatUrls] = useState<string[]>([]);
-
-  useEffect(() => {
-    const fetchCats = async () => {
-      try {
-        const response = await axios.get<CATType[]>(CAT_URL);
-        const result = response.data;
-        const catUrls = result.slice(0, 4).map((cat) => cat.url);
-        setCatUrls(catUrls);
-      } catch (error) {
-        throw new Error("Error trying to fetch cats");
-      }
-    };
-
-    fetchCats();
-  }, []);
-
-  return catUrls;
-};
-
-const useDuck = (): string => {
-  const [duckImage, setDuckImage] = useState<string>("");
-
-  useEffect(() => {
-    const fetchDuck = async () => {
-      try {
-        const response = await axios.get<DUCKType>(DUCK_URL);
-        const result = response.data;
-        setDuckImage(result.url); // Corrected to use result.url
-      } catch (error) {
-        throw new Error("Error trying to fetch duck");
-      }
-    };
-    fetchDuck();
-  }, []);
-
-  return duckImage;
-};
-const useDogs = (): string[] => {
-  const [dogUrls, setDogUrls] = useState<string[]>([]);
-
-  useEffect(() => {
-    const fetchDogs = async () => {
-      try {
-        const response = await axios.get<DOGType>(DOG_URL);
-        const result = response.data;
-        setDogUrls(result.message);
-      } catch (error) {
-        throw new Error("Error trying to fetch dogs");
-      }
-    };
-    fetchDogs();
-  }, []);
-
-  return dogUrls;
-};
+import { TileType } from "@/types";
+import { useCats, useDuck, useDogs } from "@/hooks";
 
 export const useData = (): TileType[] => {
   const [data, setData] = useState<TileType[]>([]);
