@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 type TButton = {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   children: ReactNode;
 };
 

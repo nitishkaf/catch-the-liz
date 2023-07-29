@@ -1,7 +1,17 @@
+import Buttons from "@/components/Buttons";
+import Header from "@/components/Header";
+import { Leaderboards } from "@/components/Leaderboard";
+import { Center } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 const Leaderboard = () => {
+  const router = useRouter();
   return (
     <div>
-      <h1>Leaderboard</h1>
+      <Header />
+      <Leaderboards />
+      <Center mt={20}>
+        <Buttons onClick={() => router.push("/")}>Go back</Buttons>
+      </Center>
     </div>
   );
 };
