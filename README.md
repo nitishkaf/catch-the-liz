@@ -16,8 +16,8 @@
 
 ## Roadmap
 
+- [x] Connect to the database
 - [ ] Make the UI responsive
-- [ ] Connect to the database
 - [ ] Authentication Feature to save progress
 - [ ] Additional feature such as selecting the number of tiles to increase complexity
 - [ ] Find solution to make it more accessible / compatible with accessibility devices
