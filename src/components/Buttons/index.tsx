@@ -2,14 +2,16 @@ import { Button } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 type TButton = {
+  type?: "button" | "submit" | "reset";
   disabled?: boolean;
   onClick: () => void;
   children: ReactNode;
 };
 
-const Buttons: React.FC<TButton> = ({ disabled, onClick, children }) => {
+const Buttons: React.FC<TButton> = ({ disabled, onClick, children, type }) => {
   return (
     <Button
+      type={type}
       variant="outline"
       borderColor="gray.400"
       bg="white.400"

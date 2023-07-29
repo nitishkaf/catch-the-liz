@@ -5,6 +5,8 @@ import {
   IControllerContextType,
   TLeaderboardItem,
 } from "@/types";
+import { database, ref, push } from "@/lib/firebase";
+import { v4 as uuidv4 } from "uuid";
 
 const Context = createContext<IControllerContextType | null>(null);
 
@@ -27,8 +29,23 @@ const ContextProvider: React.FC<ContextProps> = ({ children }) => {
     setStartGame(true);
   };
 
+  const savePlayerData = (name, score) => {
+    try {
+      const playerId = uuidv4();
+      const playersRef = ref(database, "players");
+      push(playersRef, {
+        id: playerId,
+        name: name,
+        score: score,
+      });
+    } catch (error) {
+      console.log("Error saving data: ", error);
+    }
+  };
+
   const Over = () => {
     setStartGame(false);
+    savePlayerData(playerName, score);
     setLeaderboard((prev) => {
       return [
         ...prev,
