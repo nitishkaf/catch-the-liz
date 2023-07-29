@@ -28,7 +28,7 @@ const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   const start = () => {
     setStartGame(true);
   };
-
+  // @ts-ignore
   const savePlayerData = (name, score) => {
     try {
       const playerId = uuidv4();

@@ -28,6 +28,7 @@ export const Leaderboards = () => {
       }
 
       // sort the temp list by score
+      // @ts-ignore
       const sortedlist = tempList.sort((a, b) => b.score - a.score);
       setList(sortedlist);
     });
