@@ -10,7 +10,7 @@ const Leaderboard = () => {
       <Header />
       <Leaderboards />
       <Center mt={20}>
-        <Buttons onClick={() => router.push("/")}>Go back</Buttons>
+        <Buttons onClick={() => router.push("/")}>Play Again</Buttons>
       </Center>
     </div>
   );
